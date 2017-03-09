@@ -28,12 +28,13 @@
   
   
 	
-    <!-- Load up application context and security configurations -->
+<!--     Load up application context and security configurations -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			/WEB-INF/applicationContext.xml
-			/WEB-INF/spring-security.xml
+			classpath:applicationContext.xml
+			classpath:spring-security.xml
+			classpath:springapp_jpa-servlet.xml
 		</param-value>
 	</context-param>
  
