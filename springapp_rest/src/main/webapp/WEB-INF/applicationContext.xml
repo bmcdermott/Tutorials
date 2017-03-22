@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:aop="http://www.springframework.org/schema/aop"
+         xmlns:tx="http://www.springframework.org/schema/tx"
+         xmlns:context="http://www.springframework.org/schema/context"
+         xmlns:mvc="http://www.springframework.org/schema/mvc"
+         xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+         xmlns:jee="http://www.springframework.org/schema/jee"
+         
+         xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		   http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+           http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+
+    <bean id="productManager" class="springapp.service.SimpleProductManager"/>
+    
+    <bean id="addProductValidator" class="springapp.service.AddProductValidator" />
+    <bean id="addComponentValidator" class="springapp.service.AddComponentValidator" />
+    <bean id="priceIncreaseValidator" class="springapp.service.PriceIncreaseValidator" />
+    
+      
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" >
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    
+<!--     <jee:jndi-lookup id="datasource" jndi-name="java:/comp/env/jdbc/springapp" expected-type="javax.sql.DataSource"/> -->
+
+    <bean id="propertyConfigurer" 
+          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+	<context:component-scan base-package="springapp" />
+
+    <jpa:repositories base-package="springapp" />
+	
+	
+
+</beans>

@@ -1,0 +1,21 @@
+
+[
+
+{
+	"description": "Added from Postman",
+	"long_description": "Yup, it was added from Postmnan",
+	"price": 99.55
+}
+
+{
+	"description": "2 Added from Postman",
+	"long_description": "2 Yup, it was added from Postmnan",
+	"price": 22.22
+}
+
+{
+	"description": "3 Added from Postman",
+	"long_description": "3 Yup, it was added from Postmnan",
+	"price": 33.33
+}
+]
