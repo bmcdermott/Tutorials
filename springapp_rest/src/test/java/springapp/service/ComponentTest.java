@@ -43,6 +43,7 @@ public class ComponentTest extends AbstractTransactionalJUnit4SpringContextTests
 	//@BeforeTransaction
     private void init() {
 		
+    	deleteFromTables("products_components");
 		deleteFromTables("Components");
 		deleteFromTables("Products");
 		

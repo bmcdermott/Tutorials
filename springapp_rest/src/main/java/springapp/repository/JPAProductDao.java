@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import springapp.domain.Product;
 
+@Repository
 @RepositoryRestResource
 public interface JPAProductDao  extends  JpaRepository<Product, Integer> {
 

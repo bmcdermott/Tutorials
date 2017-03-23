@@ -57,7 +57,7 @@ public class SimpleProductManagerTest extends AbstractTransactionalJUnit4SpringC
 
 	@Test
 	public void testGetProducts() {
-		
+		deleteFromTables("products_components");
 		deleteFromTables("Components");
 		deleteFromTables("Products");
 		
@@ -101,7 +101,7 @@ public class SimpleProductManagerTest extends AbstractTransactionalJUnit4SpringC
 	@Test
 	public void testIncreasePriceWithEmptyListOfProducts() {
 		try {
-			
+			deleteFromTables("products_components");
 			deleteFromTables("Components");
 			deleteFromTables("Products");
 			
@@ -113,7 +113,7 @@ public class SimpleProductManagerTest extends AbstractTransactionalJUnit4SpringC
 //
 	@Test
 	public void testIncreasePriceWithPositivePercentage() {
-		
+		deleteFromTables("products_components");
 		deleteFromTables("Components");
 		deleteFromTables("Products");
 		

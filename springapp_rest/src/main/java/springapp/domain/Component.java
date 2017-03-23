@@ -1,14 +1,17 @@
 package springapp.domain;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 @Entity(name="component")
 @Table(name="components")
@@ -27,7 +30,7 @@ public class Component implements Serializable {
     private String description;
     private String long_description;
 //    private int product_id;
-    private Product product;
+    private Set<Product> products = new HashSet<Product>();;
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -69,14 +72,19 @@ public class Component implements Serializable {
 		this.long_description = long_description;
 	}
 	
-	@ManyToOne
-	@JoinColumn(name = "PRODUCT_ID")
-	public Product getProduct(){
-		return this.product;
+//	@ManyToOne
+//	@JoinColumn(name = "PRODUCT_ID")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "components")
+	public Set<Product> getProducts(){
+		return this.products;
 	}
 	
-	public void setProduct(Product product){
-		this.product = product;
+	public void addProduct(Product product){
+		getProducts().add(product);
+	}
+	
+	public void setProducts(Set<Product> products){
+		this.products = products;
 	}
     
     public String toString() {
@@ -84,7 +92,7 @@ public class Component implements Serializable {
         buffer.append("Description: " + description + ";");
         buffer.append("Long Description: " + long_description + ";");
         //buffer.append("Product_id: " + product_id);
-        buffer.append("Product ID from Product:" + getProduct().getId());
+        //buffer.append("Product ID from Product:" + getProducts().getId());
         return buffer.toString();
     }
 

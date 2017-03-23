@@ -171,7 +171,7 @@ public class ProductAnnotatedFormController {
     	logger.info("Processing the page POST, Beginning");
         Product p = productManager.getProductByID(Integer.parseInt(PRODUCT_ID));
         p.addComponent(comp);
-        comp.setProduct(p);    	
+        comp.addProduct(p);    	
         addComponentValidator.validate(comp, result);
     	
         if (result.hasErrors()) {

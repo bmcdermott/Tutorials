@@ -11,6 +11,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -73,7 +76,12 @@ public class Product implements Serializable {
 		this.long_description = long_description;
 	}
 	
-	@OneToMany(mappedBy = "product", cascade=CascadeType.ALL,orphanRemoval=true, fetch=FetchType.EAGER)
+	//@OneToMany(mappedBy = "product", cascade=CascadeType.ALL,orphanRemoval=true, fetch=FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "products_components", catalog = "public", joinColumns = {
+			@JoinColumn(name = "product_id", nullable = false, updatable = false) },
+			inverseJoinColumns = { @JoinColumn(name = "component_id",
+					nullable = false, updatable = false) })
 	public Set<Component> getComponents() {
 		return this.components;
 	}
@@ -83,7 +91,7 @@ public class Product implements Serializable {
 	}
 	
 	public void addComponent(Component component){
-		component.setProduct(this);
+		component.addProduct(this);
 		getComponents().add(component);
 	}
 	

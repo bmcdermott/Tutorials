@@ -19,3 +19,26 @@
 	"price": 33.33
 }
 ]
+
+
+
+PUT
+http://localhost:8082/springapp_rest/api/components/265/product
+
+RAW
+http://localhost:8082/springapp_rest/api/components/265/products/8
+
+Header-type
+
+text/uri-list
+*************************************************************************************
+This will add component ID 14 to the existing list of components for product 2
+PATCH
+http://localhost:8082/springapp_rest/api/products/2/components
+
+BODY (Raw)
+http://localhost:8082/springapp_rest/api/products/2/components/14
+
+Header
+
+Content-type         text/uri-list
