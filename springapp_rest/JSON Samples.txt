@@ -1,0 +1,44 @@
+
+[
+
+{
+	"description": "Added from Postman",
+	"long_description": "Yup, it was added from Postmnan",
+	"price": 99.55
+}
+
+{
+	"description": "2 Added from Postman",
+	"long_description": "2 Yup, it was added from Postmnan",
+	"price": 22.22
+}
+
+{
+	"description": "3 Added from Postman",
+	"long_description": "3 Yup, it was added from Postmnan",
+	"price": 33.33
+}
+]
+
+
+
+PUT
+http://localhost:8082/springapp_rest/api/components/265/product
+
+RAW
+http://localhost:8082/springapp_rest/api/components/265/products/8
+
+Header-type
+
+text/uri-list
+*************************************************************************************
+This will add component ID 14 to the existing list of components for product 2
+PATCH
+http://localhost:8082/springapp_rest/api/products/2/components
+
+BODY (Raw)
+http://localhost:8082/springapp_rest/api/products/2/components/14
+
+Header
+
+Content-type         text/uri-list
