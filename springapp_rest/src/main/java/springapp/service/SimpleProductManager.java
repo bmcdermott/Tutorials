@@ -8,7 +8,9 @@ import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
+import springapp.domain.Component;
 import springapp.domain.Product;
+import springapp.repository.JPAComponentDao;
 import springapp.repository.JPAProductDao;
 
 @Transactional
@@ -23,6 +25,8 @@ public class SimpleProductManager implements ProductManager {
 	
 	@Autowired
     private JPAProductDao jpaProductDao;
+	@Autowired
+    private JPAComponentDao jpaComponentDao;
 
     public List<Product> getProducts() {
         // return products;
@@ -31,6 +35,10 @@ public class SimpleProductManager implements ProductManager {
     
     public Product getProductByID(int id) {
     	return (Product) jpaProductDao.findOne(id);
+    }
+    
+    public Component getComponentByID(int id) {
+    	return (Component) jpaComponentDao.findOne(id);
     }
     
     public Product addProduct(Product prod) {
@@ -49,6 +57,10 @@ public class SimpleProductManager implements ProductManager {
     
     public void deleteProduct(Product prod) {
     	jpaProductDao.delete(prod);
+    }
+    
+    public void deleteComponent(Component comp) {
+    	jpaComponentDao.delete(comp);
     }
 
     public void increasePrice(int percentage) {

@@ -42,3 +42,28 @@ http://localhost:8082/springapp_rest/api/products/2/components/14
 Header
 
 Content-type         text/uri-list
+
+
+This needed to be added to the Tomcat web.xml to get non "localhost" servers to work.  The allowed methods needed to be added
+to allow POST requests to work even from the same machine.
+  <!-- A filter that allows CORS requests added by RJM -->
+<filter>
+  <filter-name>CorsFilter</filter-name>
+  <filter-class>org.apache.catalina.filters.CorsFilter</filter-class>
+
+    <init-param>
+        <param-name>cors.allowed.origins</param-name>
+        <param-value>*</param-value>
+    </init-param>
+    <init-param>
+        <param-name>cors.allowed.methods</param-name>
+        <param-value>GET,POST,HEAD,OPTIONS,PUT,DELETE</param-value>
+    </init-param>
+</filter>
+<filter-mapping>
+  <filter-name>CorsFilter</filter-name>
+  <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+
+
