@@ -1,0 +1,29 @@
+When re-importing a project to Eclipse, if you are using configuration files that are outside of normal directories, you need to reset the java build path to include those directories.  Project-properties-Java Build Path..
+
+For example, src/test/resources or src/main/webapp/WEB-INF
+
+
+HSQLDB Related Notes
+--------------------
+
+This project is using HSQLDB
+
+jdbc:hsqldb://localhost/test
+user: sa
+password:
+
+The data manipulation scripts have been factored out into a separate "project" calls furniture_store_db_scripts.  Use ant to run these scripts from that project directory.
+
+ant resetDatabase
+
+The above command will bring the database back to its original state with sample data.
+
+
+GitHub Related Notes
+--------------------
+
+Clone (download) the whole project to your workstation
+Make your updates/changes
+Before you re-upload the project, make sure you "clean" it to delete the target files and make it smaller.
+
+
