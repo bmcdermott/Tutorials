@@ -200,5 +200,43 @@ public class ProductAnnotatedFormController {
     public String showProduct(){
         return "/admin/success";
     }
+    
+    @RequestMapping(value="/deletecomponentconfirm", method=RequestMethod.GET)
+    public String initDeleteComponentForm(@RequestParam("COMPONENT_ID")String COMPONENT_ID,
+			ModelMap model) {
+
+        Component comp = new Component();
+        model.addAttribute("component", comp);
+        model.addAttribute("COMPONENT_ID", COMPONENT_ID);
+        logger.info("Processing the page GET, for the delete component method");
+
+        return "/admin/deletecomponentconfirm";
+
+      }
+    
+    @RequestMapping(value="/deletecomponentconfirm", method=RequestMethod.POST)
+    public String deleteComponent(@ModelAttribute("component")Component comp, 
+    		BindingResult result, 
+    		@ModelAttribute("COMPONENT_ID")String COMPONENT_ID,
+    		final RedirectAttributes redirectAttributes) throws ServletException {
+
+
+        
+        Component c = productManager.getComponentByID(Integer.parseInt(COMPONENT_ID));
+        logger.info("Deleting Component " + c.getDescription() + ".");
+        productManager.deleteComponent(c);
+        logger.info("Processing the page POST, DELETED the product from the database");
+        
+        String msg = "Component: " + c.getDescription();
+        msg += ", deleted successfully";
+
+        //Flash attributes are available via the model after the redirect:
+        redirectAttributes.addFlashAttribute("component", c);
+        redirectAttributes.addFlashAttribute("message",msg);
+        
+        //TODO - Generic result page
+        return "redirect:/admin/success.htm"; 
+    }
+    
 
 }
